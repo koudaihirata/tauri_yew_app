@@ -10,8 +10,8 @@
     "windows": [
       {
         "title": "Floating Counter",
-        "width": 1000,
-        "height": 600,
+        "width": 743,
+        "height": 200,
         "resizable": false,
         "decorations": false,
         "alwaysOnTop": true,

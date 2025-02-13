@@ -41,6 +41,8 @@ use yew::prelude::*;
 
 #[function_component(App)]
 fn app() -> Html {
+    // デバッグログの出力（glooライブラリを利用）
+    gloo::console::log!("App component rendered");
     let toggle_blackout = Callback::from(move |_| {
         #[cfg(target_arch = "wasm32")]
         {
@@ -73,5 +75,5 @@ fn main() {
     // 明示的に「app」要素にマウント
     let document: Document = window().unwrap().document().unwrap();
     let mount_node = document.get_element_by_id("app").unwrap();
-    yew::Renderer::<App>::new().render_to(mount_node);
+    yew::Renderer::<App>::with_root(mount_node).render();
 }

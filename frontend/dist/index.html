@@ -4,17 +4,17 @@
 <head>
     <meta charset="utf-8">
     <title>Tauri Yew App</title>
-
-<link rel="modulepreload" href="/frontend-a940d328a619909f.js" crossorigin=anonymous integrity="sha384-V6y8T5tYl1FLzIdIonf/h6ktDcBxs6ryYdzqVhL+DwxgOuxZ3FQMNoiGR1fa/sj8">
-<link rel="preload" href="/frontend-a940d328a619909f_bg.wasm" crossorigin=anonymous integrity="sha384-1Lk9agTe7v1YiXopD7sEHRp7ytJ/I6Yk3+CsO5D63LxvNXMhZl74Mdm0oYuUHoOY" as="fetch" type="application/wasm"></head>
+    <link rel="stylesheet" href="/styles.css">
+<link rel="modulepreload" href="/frontend-301457248da5756f.js" crossorigin="anonymous" integrity="sha384-TirZPX2+I5hurNG+7PTkOUNTtS2EmYbY5ZnQ11DVKGS4uYiVvIHzQCzQw3uGdcd7"><link rel="preload" href="/frontend-301457248da5756f_bg.wasm" crossorigin="anonymous" integrity="sha384-WoavTOgHNARUkQ1lFKo1zEw76PGuX6y75HX+fABMZb7qZwUYN6m9cHgZ4/Wk9zoo" as="fetch" type="application/wasm"></head>
 
 <body>
     <!-- Trunkはdata-trunk attributeでエントリーポイントを認識します -->
     <div id="app" data-yew></div>
+    <script type="module" src="./main.js"></script>
 
-<script type="module" nonce="svqdAXpw0d2BckLAHqiWfg==">
-import init, * as bindings from '/frontend-a940d328a619909f.js';
-const wasm = await init('/frontend-a940d328a619909f_bg.wasm');
+<script type="module">
+import init, * as bindings from '/frontend-301457248da5756f.js';
+const wasm = await init({ module_or_path: '/frontend-301457248da5756f_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -114,7 +114,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
                         break;
                 }
             };
-            ws.onclose = this.onclose;
+            ws.onclose = () => this.onclose();
         }
 
         onclose() {
@@ -126,7 +126,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
                     // rebuilt on restart)
                     const ws = new WebSocket(this.url);
                     ws.onopen = () => window.location.reload();
-                    ws.onclose = this.onclose;
+                    ws.onclose = () => this.onclose();
                 },
                 this.poll_interval);
         }
